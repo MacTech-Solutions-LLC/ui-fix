@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>UI-Fix Options</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #fafafa; color: #171717; padding: 40px; display: flex; justify-content: center; }
+    .card { background: #fff; border: 1px solid #e5e5e5; border-radius: 16px; padding: 28px 32px;
+      max-width: 560px; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+    h1 { font-size: 18px; margin-bottom: 4px; }
+    .sub { font-size: 13px; color: #737373; margin-bottom: 24px; }
+    label { display: block; font-size: 12px; font-weight: 600; color: #525252;
+      text-transform: uppercase; letter-spacing: .04em; margin: 18px 0 6px; }
+    input { width: 100%; border: 1px solid #d4d4d4; border-radius: 10px; padding: 10px 14px;
+      font-size: 14px; outline: none; }
+    input:focus { border-color: #6366f1; box-shadow: 0 0 0 2px rgba(99,102,241,.25); }
+    .hint { font-size: 12px; color: #a3a3a3; margin-top: 6px; line-height: 1.4; }
+    button { margin-top: 24px; border: 0; border-radius: 10px; background: #4f46e5; color: #fff;
+      font-size: 14px; font-weight: 600; padding: 10px 20px; cursor: pointer; }
+    button:hover { background: #4338ca; }
+    .status { display: inline-block; margin-left: 12px; font-size: 13px; color: #059669; }
+    .status.err { color: #b91c1c; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>UI-Fix — Element Pinpoint</h1>
+    <p class="sub">Where should submitted feedback be sent?</p>
+
+    <label for="endpoint">Feedback endpoint (POST)</label>
+    <input id="endpoint" type="url" placeholder="https://suite.mactechsolutionsllc.com/api/public/feedback" />
+    <p class="hint">
+      For MacTech Suite, use <code>https://&lt;your-suite-host&gt;/api/public/feedback</code>.
+      The payload is <code>content, category, pageUrl, elementSelector, elementId,
+      elementClass, elementText, elementType, submittedBy</code>. Leave empty to use
+      "Copy as JSON" only.
+    </p>
+
+    <label for="authToken">Ingest secret (Bearer token)</label>
+    <input id="authToken" type="password" placeholder="Sent as Authorization: Bearer …" />
+    <p class="hint">
+      The shared <code>FEEDBACK_INGEST_SECRET</code> from the Suite — required for the
+      MacTech feedback endpoint. Ask your admin for it. Stored in Chrome sync storage.
+    </p>
+
+    <label for="submitter">Your name / email (optional)</label>
+    <input id="submitter" type="text" placeholder="e.g. patrick@mactechsolutionsllc.com" />
+    <p class="hint">
+      Tags your feedback so the reviewer knows who filed it. Leave blank to submit
+      anonymously.
+    </p>
+
+    <button id="save">Save</button>
+    <span class="status" id="status"></span>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>
